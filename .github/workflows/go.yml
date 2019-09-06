@@ -51,4 +51,6 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v .
+      run: |
+        cd /home/runner/go/src/github.com/$GITHUB_REPOSITORY
+        go build -v .
