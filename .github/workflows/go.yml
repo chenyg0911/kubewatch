@@ -14,13 +14,24 @@ jobs:
       id: go
 
     - name: Set GOPATH
-        # temporary fix
-        # see https://github.com/actions/setup-go/issues/14
       run: |
-          echo "##[set-env name=GOPATH;]$(dirname $GITHUB_WORKSPACE)"
-          echo "##[set-env name=GOBIN;]$(dirname $GOPATH/bin)"
-          echo "##[add-path]$(dirname $GITHUB_WORKSPACE)/bin"
-      shell: bash
+        export GOPATH=$HOME/go
+        export GOBIN=$(go env GOPATH)/bin
+        export PATH=$PATH:$GOPATH
+        export PATH=$PATH:$GOBIN
+        mkdir -p $GOPATH/pkg
+        mkdir -p $GOBIN
+        mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv $(pwd)/* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+    # - name: Set GOPATH
+    #     # temporary fix
+    #     # see https://github.com/actions/setup-go/issues/14
+    #   run: |
+    #       echo "##[set-env name=GOPATH;]$(dirname $GITHUB_WORKSPACE)"
+    #       echo "##[set-env name=GOBIN;]$(dirname $GOPATH/bin)"
+    #       echo "##[add-path]$(dirname $GITHUB_WORKSPACE)/bin"
+    #   shell: bash
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
