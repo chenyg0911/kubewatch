@@ -14,7 +14,7 @@ resourcesToWatch:
   configmap: false
 slack:
   channel: '#k8s-monitor'
-  token: 'xoxp-739115991521-745034697732-745051520532-15936f253397acee6c56a145845218fa'
+  token: ''
 
 image:
   registry: "registry.mooplab.com:8443"
