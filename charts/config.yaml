@@ -1,0 +1,24 @@
+rbac:
+  create: true
+
+namespaceToWatch: "default"
+
+resourcesToWatch:
+  daemonset: false
+  deployment: false
+  pod: true
+  replicaset: false
+  replicationcontroller: false
+  services: false
+  secret: false
+  configmap: false
+slack:
+  channel: '#k8s-monitor'
+  token: 'xoxp-739115991521-745034697732-745051520532-15936f253397acee6c56a145845218fa'
+
+image:
+  registry: "registry.mooplab.com:8443"
+  repository: "tools/kubewatch"
+  tag: "v0.0.1"
+  pullPolicy: "Always"
+  
